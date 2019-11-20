@@ -3,12 +3,12 @@ const game = () => {
     let cScore = 0;
 
     // Start game
-    const startGame = () =>{
+    const startGame = () => {
         const playBtn = document.querySelector(".intro button");
         const introScreen = document.querySelector(".intro");
         const match = document.querySelector(".match");
 
-        playBtn.addEventListener("click", () =>{
+        playBtn.addEventListener("click", () => {
             introScreen.classList.add("fadeOut");
             match.classList.add("fadeIn")
         });
@@ -21,7 +21,9 @@ const game = () => {
         const computerHand = document.querySelector(".computer-hand");
         const hands = document.querySelectorAll('.hands img');
 
-        hands.forEach(hand =>{
+        
+
+        hands.forEach(hand => {
             hand.addEventListener('animationend', function(){
                 this.style.animation = '';
             });
@@ -35,17 +37,20 @@ const game = () => {
                 const computerNumber = Math.floor(Math.random() * 3);
                 const computerChoice = computerOptions[computerNumber];
                 
+                playerHand.src = "./assets/rock.png";
+                computerHand.src = "./assets/rock.png";
+
                 setTimeout(() => {
                     // Here we compare hands
                     compareHands(this.textContent, computerChoice)
                     //Update Images
                     playerHand.src = `./assets/${this.textContent}.png`;
                     computerHand.src = `./assets/${computerChoice}.png`;
-                    }, 2000)
+                    }, 900)
 
                 // Animation
-                playerHand.style.animation = "shakePlayer 2s ease";
-                computerHand.style.animation = "shakeComputer 2s ease";
+                playerHand.style.animation = "shakePlayer 1.2s ease";
+                computerHand.style.animation = "shakeComputer 1.2s ease";
             });
         });
     };
@@ -58,14 +63,14 @@ const game = () => {
         
     };
 
-    const compareHands = (playerChoice, computerChoice) =>{
+    const compareHands = (playerChoice, computerChoice) => {
         const winner = document.querySelector('.winner');
-        if(playerChoice === computerChoice){
+        if(playerChoice === computerChoice) {
             winner.textContent = "It is a tie";
             return;
         }
-        if(playerChoice === 'rock'){
-            if(computerChoice === 'scissors'){
+        if(playerChoice === 'rock') {
+            if(computerChoice === 'scissors') {
                 winner.textContent = 'Player wins'
                 pScore++;
                 updateScore();
@@ -78,8 +83,8 @@ const game = () => {
             }
         }
 
-        if(playerChoice === 'paper'){
-            if(computerChoice === 'scissors'){
+        if(playerChoice === 'paper') {
+            if(computerChoice === 'scissors') {
                 winner.textContent = 'Computer wins'
                 cScore++;
                 updateScore();
@@ -92,8 +97,8 @@ const game = () => {
             }
         }
 
-        if(playerChoice === 'scissors'){
-            if(computerChoice === 'rock'){
+        if(playerChoice === 'scissors') {
+            if(computerChoice === 'rock') {
                 winner.textContent = 'Computer wins'
                 cScore++;
                 updateScore();
